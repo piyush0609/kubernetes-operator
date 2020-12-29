@@ -20,6 +20,7 @@ podTemplate(label: label,
             
         stage('Run kubectl') {
             container('kubectl') {
+                sh "sleep 300"
                 sh "kubectl get pods -n jenkins"
             }
         }
