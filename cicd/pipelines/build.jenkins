@@ -21,9 +21,6 @@ podTemplate(label: label,
                 timeout(time: 15, unit: 'MINUTES') {
                     checkout scm
                 }
-                container('go') {
-                    sh 'pwd'
-                }
             }
 
             stage('Dep') {
