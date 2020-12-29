@@ -8,12 +8,19 @@ def workdir = "${workspace}/src/github.com/jenkinsci/kubernetes-operator/"
 podTemplate(label: label,
         containers: [
                 containerTemplate(name: 'alpine', image: 'alpine:3.11', ttyEnabled: true, command: 'cat'),
+                containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.18.14', command: 'cat', ttyEnabled: true),
         ],
         ) {
     node(label) {
         stage('Run shell') {
             container('alpine') {
-                sh 'kubectl get pods -n jenkins'
+                sh 'echo "hello world"'
+            }
+        }
+            
+        stage('Run kubectl') {
+            container('kubectl') {
+                sh "kubectl get pods -n jenkins"
             }
         }
     }
